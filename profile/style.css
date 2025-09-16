@@ -1,0 +1,123 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+:root {
+  --primaryColor: #ff7810;
+}
+#container {
+  width: 50%;
+  min-height: 100vh;
+  max-height: 100vh;
+  overflow-y: auto;
+  margin: 0 auto;
+  border: 1px solid gainsboro;
+  padding: 10px;
+  padding-bottom: 50px;
+}
+.main {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+.topBar {
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+  padding: 10px;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.main .detailsForm {
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+  padding: 10px;
+}
+.main .detailsForm form {
+  margin-top: 15px;
+  border: 1px solid gainsboro;
+  padding: 10px;
+  border-radius: 5px;
+}
+.formField {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin-bottom: 15px;
+}
+.formField input,
+select {
+  border: 1px solid gainsboro;
+  border-radius: 3px;
+  padding: 8px;
+  font-size: 17px;
+  outline: none;
+  width: 100%;
+}
+.formField select {
+  text-transform: uppercase;
+}
+.sameAs {
+  margin-bottom: 15px;
+}
+.profileImageUpload {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 15px;
+}
+.profileImageUpload img {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+.profileImageUpload .formField {
+  flex: 1;
+}
+.saveChangesBtn {
+  border: none;
+  padding: 10px;
+  border-radius: 5px;
+  background-color: black;
+  color: white;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+}
+.warningContainer {
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+  padding: 10px;
+  border-radius: 5px;
+  margin-top: 20px;
+}
+.warning {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background-color: rgba(220, 220, 220, 0.3);
+  padding: 10px;
+  border-radius: 5px;
+}
+#nidContainer,
+#passportContainer,
+#drivingLicenseContainer,
+#voterIdCardContainer {
+  display: none;
+}
+.required {
+  color: red;
+  font-size: 15px;
+  font-weight: bold;
+}
+.headingDiv {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.headingDiv p {
+  font-size: 17px;
+  font-weight: 500;
+}
