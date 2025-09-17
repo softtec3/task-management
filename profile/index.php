@@ -1,4 +1,9 @@
 <?php 
+    session_start();
+    if(!isset($_SESSION["verify_user"])){
+        header("Location: /task-management");
+        exit();
+    }
     include_once("../php/config.php");
     $prev_data = $conn->query("SELECT * FROM employees WHERE id=1");
     $fetched_data = $prev_data->fetchAll();
@@ -597,7 +602,9 @@
 
         })
 
-
+    setTimeout(() => {
+        window.location.href = "/task-management/logoutFromProfile.php";
+    }, 3 * 60 * 60 * 1000);
     </script>
 </body>
 </html>

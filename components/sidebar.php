@@ -1,3 +1,24 @@
+<?php
+    include("./php/config.php");
+    $user_id =  $_SESSION["user_id"];
+    if(isset($_POST["passkey"])){
+        $passkey = $_POST["passkey"];
+        $find_user = $conn->query("SELECT * FROM passkey_log WHERE employee_id='$user_id'");
+        $get_user = $find_user->fetch();
+        if($get_user){
+            if($get_user["passkey"] == $passkey){
+                $_SESSION["verify_user"] = $get_user["employee_id"];
+                header("Location: /task-management/profile");
+                exit();
+            }else{
+                echo "Password not matched";
+            }
+        }else{
+            echo "User not found";
+        }
+    }
+?>
+
 <aside class="sidebar">
            <div class="profile">
             <div class="proImg">
@@ -23,13 +44,13 @@
             <span id="loginPopupCloseBtn"><i class="fa-solid fa-xmark"></i></span>
                 <div id="loginDefault" class="loginDefault">
                     <p> <i class="fa-solid fa-triangle-exclamation" style="color: red;"></i> Your profile page contains very important and confidential information. So, Don't share your profile passkey with others.</p>
-                    <div class="passkeyContainer">
+                    <form action="" method="post" class="passkeyContainer">
                         <label for="passkey">Passkey</label>
                         <div class="inputField">
-                            <input type="number" placeholder="5 Digits">
-                            <button>Submit</button>
+                            <input type="number" name="passkey" placeholder="5 Digits" maxlength="5">
+                            <button type="submit">Submit</button>
                         </div>
-                    </div>
+                    </form>
                     <button id="changePasskeyBtn" class="btn changePasskeyBtn">Change Passkey</button>
                 </div>
 
