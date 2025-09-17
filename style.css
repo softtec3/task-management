@@ -45,8 +45,8 @@ a {
   gap: 15px;
 }
 .sidebar .profile .proImg {
-  width: 100px;
-  height: 100px;
+  width: 150px;
+  height: 150px;
   border-radius: 50%;
   overflow: hidden;
   border: 3px solid var(--primaryColor);
@@ -200,6 +200,7 @@ a {
   box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
   padding: 10px;
   border-radius: 5px;
+  justify-content: space-between;
 }
 .topbar img {
   width: 150px;
@@ -308,3 +309,49 @@ a {
   background-color: red;
   color: white;
 }
+
+/* login pages styles */
+#loginContainer {
+  width: 100%;
+  min-height: 100vh;
+  max-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+#loginContainer .loginForm {
+  width: 400px;
+  padding: 20px;
+  box-shadow: var(--primaryShadow);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  background-color: white;
+  border-radius: 5px;
+}
+#loginContainer .loginForm h1 {
+  text-align: center;
+}
+#loginContainer .loginForm .formContainer div {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+  margin-bottom: 15px;
+}
+#loginContainer .loginForm .formContainer div input {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid gainsboro;
+  outline: none;
+  border-radius: 5px;
+}
+/* #loginContainer .loginForm .formContainer div button {
+  padding: 8px;
+  background-color: var(--primaryColor);
+  font-size: 16px;
+  border: none;
+  color: ;
+  cursor: pointer;
+  border-radius: 5px;
+} */
