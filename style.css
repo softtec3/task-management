@@ -355,3 +355,9 @@ a {
   cursor: pointer;
   border-radius: 5px;
 } */
+#errorSpan {
+  display: block;
+  text-align: center;
+  font-size: 14px;
+  color: red;
+}

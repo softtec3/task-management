@@ -1,23 +1,3 @@
-<?php
-    include("./php/config.php");
-    $user_id =  $_SESSION["user_id"];
-    if(isset($_POST["passkey"])){
-        $passkey = $_POST["passkey"];
-        $find_user = $conn->query("SELECT * FROM passkey_log WHERE employee_id='$user_id'");
-        $get_user = $find_user->fetch();
-        if($get_user){
-            if($get_user["passkey"] == $passkey){
-                $_SESSION["verify_user"] = $get_user["employee_id"];
-                header("Location: /task-management/profile");
-                exit();
-            }else{
-                echo "Password not matched";
-            }
-        }else{
-            echo "User not found";
-        }
-    }
-?>
 
 <aside class="sidebar">
            <div class="profile">
@@ -39,7 +19,13 @@
             <a href="/task-management/pending-tasks"><i class="fas fa-hourglass-half"></i> Pending Tasks</a>
            </div>
 
-           <div id="loginPopup">
+           <div id="loginPopup" style="display: <?php 
+            if($changed){
+                echo "flex";
+            }else{
+                echo "none";
+            };
+           ?>;">
             <div class="loginPopupContainer">
             <span id="loginPopupCloseBtn"><i class="fa-solid fa-xmark"></i></span>
                 <div id="loginDefault" class="loginDefault">
@@ -47,32 +33,33 @@
                     <form action="" method="post" class="passkeyContainer">
                         <label for="passkey">Passkey</label>
                         <div class="inputField">
-                            <input type="number" name="passkey" placeholder="5 Digits" maxlength="5">
+                            <input type="number" name="passkey" placeholder="5 Digits" required maxlength="5">
                             <button type="submit">Submit</button>
                         </div>
                     </form>
                     <button id="changePasskeyBtn" class="btn changePasskeyBtn">Change Passkey</button>
                 </div>
 
-                <div id="changePasskey" class="changePasskey">
+                <form action="" method="post" id="changePasskey" class="changePasskey">
                     <h3>Set New Passkey</h3>
                     <div class="cpDiv">
                         <label for="currentPasskey">Current Passkey</label>
-                        <input type="text" name="current">
+                        <input type="password" name="currentPasskey" required>
                     </div>
                     <div class="cpDiv">
                         <label for="newPasskey">New Passkey</label>
-                        <input type="text" name="new">
+                        <input type="password" name="newPasskey" id="newPasskey" required>
                     </div>
                     <div class="cpDiv">
                         <label for="confirmNewPasskey">Confirm New Passkey</label>
-                        <input type="text" name="confirmNewPasskey">
+                        <input type="password" name="confirmNewPasskey" id="confirmNewPasskey" required>
                     </div>
+                    <span id="errorSpan"></span>
                     <div class="cpActionsBtns">
-                        <button  class="btn">Change</button>
-                        <button id="cancelBtn" class="btn">Cancel</button>
+                        <button type="submit" id="changeBtn" class="btn">Change</button>
+                        <button type="button" id="cancelBtn" class="btn">Cancel</button>
                     </div>
-                </div>
+                </form>
             </div>
            </div>
 </aside>
@@ -98,6 +85,23 @@
     })
     loginBtn.addEventListener("click",()=>{
         loginPopup.style.display = "flex";
+    })
+
+    // newPasskey and confirmNewPasskey matched
+    const newPasskey = document.getElementById("newPasskey");
+    const confirmNewPasskey = document.getElementById("confirmNewPasskey");
+    const errorSpan = document.getElementById("errorSpan");
+    const changeBtn = document.getElementById("changeBtn");
+   
+    confirmNewPasskey.addEventListener("input",(e)=>{
+        let value = e.target.value;
+        if(value !== newPasskey.value){
+            changeBtn.disabled = true;
+            errorSpan.innerText = "Confirm password not matched with new password"
+        }else{
+            errorSpan.innerText = "";
+            changeBtn.disabled = false;
+        }
     })
     
 </script>

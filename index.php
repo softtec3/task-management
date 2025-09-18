@@ -1,9 +1,53 @@
 <?php
+    include("./php/config.php");
     session_start();
     if (!isset($_SESSION["user_id"])) {
         header("Location: /task-management/login");
         exit();
+    };
+    // Checking for profile page
+    $user_id =  $_SESSION["user_id"];
+    if(isset($_POST["passkey"])){
+        $passkey = $_POST["passkey"];
+        $find_user = $conn->query("SELECT * FROM passkey_log WHERE employee_id='$user_id'");
+        $get_user = $find_user->fetch();
+        if($get_user){
+            if($get_user["passkey"] == $passkey){
+                $_SESSION["verify_user"] = $get_user["employee_id"];
+                header("Location: /task-management/profile");
+                exit();
+            }else{
+                echo "Password not matched";
+            }
+        }else{
+            echo "User not found";
+        }
     }
+    // Passkey change
+    $changed = false;
+    if(isset($_POST['currentPasskey'])){
+        $current_passkey = $_POST["currentPasskey"];
+        $new_passkey = $_POST["newPasskey"];
+        $get_user_data = $conn->query("SELECT * FROM passkey_log WHERE employee_id='$user_id'");
+        $user_data = $get_user_data->fetch();
+        if($user_data){
+            if($user_data["passkey"] == $current_passkey){
+                $change_passkey = $conn->prepare("UPDATE passkey_log SET passkey='$new_passkey' WHERE employee_id='$user_id'");
+                $changed_passkey = $change_passkey->execute();
+                if($changed_passkey){
+                    echo "Passkey Changed. Please Login";
+                    unset($_SESSION["verify_user"]);
+                    $changed = true;
+                }else{
+                    echo "Something went wrong";
+                }
+            }else{
+               echo "Invalid current passkey"; 
+            }
+        }else{
+            echo "User not found";
+        };
+    };
 ?>
 
 <!DOCTYPE html>

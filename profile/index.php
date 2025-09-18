@@ -601,7 +601,7 @@
             }
 
         })
-
+    // After 3 hours auto unset profile page session
     setTimeout(() => {
         window.location.href = "/task-management/logoutFromProfile.php";
     }, 3 * 60 * 60 * 1000);
