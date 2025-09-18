@@ -2,11 +2,18 @@
 <aside class="sidebar">
            <div class="profile">
             <div class="proImg">
-                <img src="https://images.unsplash.com/photo-1568602471122-7832951cc4c5?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8bWFufGVufDB8fDB8fHww" alt="">
+                <?php 
+                    if($logged_user["profile_image"]){
+                    $url = "./uploads/". $logged_user['profile_image'];
+                     echo "<img  src='$url'>";
+                    }else{
+                         echo "<img src='./placeholder.jpg'>";
+                    }
+                ?>
             </div>
             <div class="proDesc">
-                <p>101</p>
-                <p>Tahmid Alam</p>
+                <p><?php echo $logged_user["employee_id"];?></p>
+                <p><?php echo $logged_user["first_name"]." ". $logged_user["last_name"];?></p>
                 <p>Development</p>
                 <button id="loginBtn" class="loginBtn">Profile Login</button>
             </div>

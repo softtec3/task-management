@@ -1,11 +1,12 @@
 <?php 
     session_start();
+    $logged_user_id = $_SESSION["verify_user"];
     if(!isset($_SESSION["verify_user"])){
         header("Location: /task-management");
         exit();
     }
     include_once("../php/config.php");
-    $prev_data = $conn->query("SELECT * FROM employees WHERE id=1");
+    $prev_data = $conn->query("SELECT * FROM employees WHERE employee_id='$logged_user_id'");
     $fetched_data = $prev_data->fetchAll();
     // if($fetched_data){
     //     echo "<pre>";
@@ -49,7 +50,7 @@
 
         // Contact Info
         $contact_number = $_POST["contactNumber"];
-        $update_info = $conn->prepare("UPDATE employees SET 
+        $update_info = $conn->prepare("UPDATE personal_details SET 
         profile_image = '$profile_image',
         first_name = '$first_name',
         last_name = '$last_name',
@@ -66,8 +67,9 @@
         permanent_state = '$present_state',
         permanent_zipcode = '$permanent_zipcode',
         permanent_country = '$permanent_country',
-        contact_number = '$contact_number'
-        WHERE id = 1
+        contact_number = '$contact_number',
+        status='review'
+        WHERE employee_id='$logged_user_id'
         ");
         $updated_personal_details = $update_info->execute();
         if($updated_personal_details){
@@ -88,7 +90,9 @@
         $e_full_relation_three = $_POST["emergencyRelation3"];
         $e_full_contact_three = $_POST["emergencyPhone3"];
 
-        $update_emergency_contact = $conn->prepare("UPDATE employees SET e_full_name_one='$e_full_name_one', e_full_relation_one='$e_full_relation_one', e_full_contact_one='$e_full_contact_one', e_full_name_two='$e_full_name_two', e_full_relation_two='$e_full_relation_two', e_full_contact_two='$e_full_contact_two', e_full_name_three='$e_full_name_three',  e_full_relation_three='$e_full_relation_three', e_full_contact_three='$e_full_contact_three' WHERE id=1");
+        $update_emergency_contact = $conn->prepare("UPDATE emergency_contact SET e_full_name_one='$e_full_name_one', e_full_relation_one='$e_full_relation_one', e_full_contact_one='$e_full_contact_one', e_full_name_two='$e_full_name_two', e_full_relation_two='$e_full_relation_two', e_full_contact_two='$e_full_contact_two', e_full_name_three='$e_full_name_three',  e_full_relation_three='$e_full_relation_three', e_full_contact_three='$e_full_contact_three',
+        status='review'
+        WHERE employee_id='$logged_user_id'");
         
         $updated_emergency_contact = $update_emergency_contact->execute();
         if($updated_emergency_contact){
@@ -107,7 +111,7 @@
     $itin_no = $_POST["itinNo"];
     if($passport_no && $_FILES["passportPhoto"]){
         $passport_photo = upload_file_get_name("passportPhoto");
-        $update_passport = $conn->prepare("UPDATE employees SET passport_no='$passport_no', passport_photo='$passport_photo' WHERE id=1");
+        $update_passport = $conn->prepare("UPDATE essential_documents SET passport_no='$passport_no', passport_photo='$passport_photo', status='review' WHERE employee_id='$logged_user_id'");
         $updated_passport = $update_passport->execute();
         if($updated_passport){
             header("Location: index.php");
@@ -120,9 +124,10 @@
     $driving_license_front_photo = upload_file_get_name("drivingLicenseFrontPhoto");
     $driving_license_back_photo  = upload_file_get_name("drivingLicenseBackPhoto");
 
-    $update_driving_license = $conn->prepare("UPDATE employees SET driving_license_no='$driving_license_no', driving_license_front='$driving_license_front_photo',
-    driving_license_back='$driving_license_back_photo'
-    WHERE id=1");
+    $update_driving_license = $conn->prepare("UPDATE essential_documents SET driving_license_no='$driving_license_no', driving_license_front='$driving_license_front_photo',
+    driving_license_back='$driving_license_back_photo',
+    status='review'
+    WHERE employee_id='$logged_user_id'");
         $updated_driving_license = $update_driving_license->execute();
         if($updated_driving_license){
             header("Location: index.php");
@@ -134,9 +139,10 @@
     $voter_card_front_photo = upload_file_get_name("voterCardFrontPhoto");
     $voter_card_back_photo  = upload_file_get_name("voterCardBackPhoto");
 
-    $update_voter_card = $conn->prepare("UPDATE employees SET voter_card_no='$voter_id_no', voter_card_front='$voter_card_front_photo',
-    voter_card_back='$voter_card_back_photo'
-    WHERE id=1");
+    $update_voter_card = $conn->prepare("UPDATE essential_documents SET voter_card_no='$voter_id_no', voter_card_front='$voter_card_front_photo',
+    voter_card_back='$voter_card_back_photo',
+    status='review'
+    WHERE employee_id='$logged_user_id'");
         $updated_voter_card = $update_voter_card->execute();
         if($updated_voter_card){
             header("Location: index.php");
@@ -146,10 +152,8 @@
 
     };
     if($ssn_no){
-        echo "SSN";
     $ssn_photo = upload_file_get_name("ssnPhoto");
-
-    $update_ssn = $conn->prepare("UPDATE employees SET ssn_no='$ssn_no', ssn_photo='$ssn_photo' WHERE id=1");
+    $update_ssn = $conn->prepare("UPDATE essential_documents SET ssn_no='$ssn_no', ssn_photo='$ssn_photo', status='review' WHERE employee_id='$logged_user_id'");
 
         $updated_ssn = $update_ssn->execute();
         if($updated_ssn){
@@ -161,8 +165,9 @@
     if($itin_no){
     $itin_photo = upload_file_get_name("itinPhoto");
 
-    $update_itin = $conn->prepare("UPDATE employees SET itin_no='$itin_no', itin_photo='$itin_photo'
-    WHERE id=1");
+    $update_itin = $conn->prepare("UPDATE essential_documents SET itin_no='$itin_no', itin_photo='$itin_photo',
+    status='review'
+    WHERE employee_id='$logged_user_id'");
         $updated_itin = $update_itin->execute();
         if($updated_itin){
             header("Location: index.php");
@@ -172,6 +177,21 @@
     };
     
     };
+
+    // Getting status
+
+    // Personal Details Status
+    $personal_details_status = $conn->query("SELECT `status` FROM personal_details WHERE employee_id='$logged_user_id'");
+    $p_details = $personal_details_status->fetch();
+    // Emergency Contact Status
+    $emergency_contact_status = $conn->query("SELECT `status` FROM emergency_contact WHERE employee_id='$logged_user_id'");
+    $e_contact = $emergency_contact_status->fetch();
+    // Essential Documents Status
+    $essential_documents_status = $conn->query("SELECT `status` FROM essential_documents WHERE employee_id='$logged_user_id'");
+    $e_documents = $essential_documents_status->fetch();
+    // Main Profile Status
+    $main_employee_status = $conn->query("SELECT `status` FROM employees WHERE employee_id='$logged_user_id'");
+    $m_employee = $main_employee_status->fetch();
 
 ?>
 
@@ -188,7 +208,13 @@
     <section id="container">
         <div class="topBar">
             <h2>Welcome Mr Tahmid Alam</h2>
-            <h3>Status: Review</h3>
+            <h3>Status: <span style="color: <?php if($p_details["status"]!=="approved"){
+                        echo "orange";
+                    }else{
+                        echo "green";
+                    }
+                    
+                    ?>;"><?php echo $m_employee["status"]?></span></h3>
         </div>
         <div class="warningContainer">
             <p class="warning"><i class="fa-solid fa-triangle-exclamation"></i>
@@ -202,7 +228,13 @@
             <div class="detailsForm">
                 <div class="headingDiv">
                     <h3>Personal Details</h3>
-                    <p>Status: <span id="infoStatus" style="color: green;">Approved</span></p>
+                    <p>Status: <span id="infoStatus" style="color: <?php if($p_details["status"]!=="approved"){
+                        echo "orange";
+                    }else{
+                        echo "green";
+                    }
+                    
+                    ?>;"><?php echo $p_details["status"]?></span></p>
                 </div>
                 <form action="" method="post" enctype="multipart/form-data">
                     <div class="profileImageUpload">
@@ -325,7 +357,13 @@
             <div class="detailsForm">
             <div class="headingDiv">
                 <h3>Essential Documents</h3>
-                <p>Status: <span id="infoStatus" style="color: green;">Approved</span></p>
+                <p>Status: <span id="infoStatus" style="color: <?php if($p_details["status"]!=="approved"){
+                        echo "orange";
+                    }else{
+                        echo "green";
+                    }
+                    
+                    ?>;"><?php echo $e_documents["status"]?></span></p>
             </div>
             <form action="" method="post" enctype="multipart/form-data">
                 <div class="formField">
@@ -341,9 +379,7 @@
                <div id="passportContainer">
                 <div class="formField">
                 <label for="passportNo">Passport No</label>
-                <input type="text" name="passportNo" value="<?php
-                        echo $fetched_data[0]["passport_no"];
-                         ?>">
+                <input type="text" name="passportNo">
                 </div>
                 <div class="formField">
                 <label for="passportPhoto">Photo of Passport</label>
@@ -354,9 +390,7 @@
                <div id="drivingLicenseContainer">
                 <div class="formField">
                 <label for="drivingLicenseNo">Driving License No</label>
-                <input type="text" name="drivingLicenseNo" value="<?php
-                        echo $fetched_data[0]["driving_license_no"];
-                         ?>">
+                <input type="text" name="drivingLicenseNo">
                 </div>
                 <div class="formFlex">
                 <div class="formField">
@@ -422,7 +456,13 @@
             <div class="detailsForm">
             <div class="headingDiv">
                     <h3>Emergency Contact</h3>
-                    <p>Status: <span id="infoStatus" style="color: green;">Approved</span></p>
+                    <p>Status: <span id="infoStatus" style="color: <?php if($p_details["status"]!=="approved"){
+                        echo "orange";
+                    }else{
+                        echo "green";
+                    }
+                    
+                    ?>;"><?php echo $e_contact["status"]?></span></p>
             </div>
             <form action="" method="post">
                 <!-- Contact 1 -->

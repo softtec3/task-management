@@ -48,6 +48,10 @@
             echo "User not found";
         };
     };
+    // loggedIn user details
+    $logged_user_details = $conn->query("SELECT * FROM employees WHERE employee_id='$user_id'");
+    $logged_user = $logged_user_details->fetch();
+
 ?>
 
 <!DOCTYPE html>
