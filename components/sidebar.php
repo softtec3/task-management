@@ -1,10 +1,17 @@
-
 <aside class="sidebar">
            <div class="profile">
             <div class="proImg">
                 <?php 
-                    if($logged_user["profile_image"]){
+                $path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+                $path = rtrim($path, '/');
+                 $url="";
+                if ($path === "/task-management") {
                     $url = "./uploads/". $logged_user['profile_image'];
+                } else {
+                   $url = "../uploads/". $logged_user['profile_image'];
+                }
+                    if($logged_user["profile_image"]){
+                    
                      echo "<img  src='$url'>";
                     }else{
                          echo "<img src='./placeholder.jpg'>";

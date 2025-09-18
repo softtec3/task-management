@@ -17,10 +17,14 @@
                 header("Location: /task-management/profile");
                 exit();
             }else{
-                echo "Password not matched";
+                echo "<script>
+                        alert('Password not matched');
+                    </script>";
             }
         }else{
-            echo "User not found";
+            echo "<script>
+                        alert('User not found');
+                    </script>";
         }
     }
     // Passkey change
@@ -35,17 +39,26 @@
                 $change_passkey = $conn->prepare("UPDATE passkey_log SET passkey='$new_passkey' WHERE employee_id='$user_id'");
                 $changed_passkey = $change_passkey->execute();
                 if($changed_passkey){
-                    echo "Passkey Changed. Please Login";
+                    echo "<script>
+                        alert('Passkey Changed. Please Login');
+                        </script>";
                     unset($_SESSION["verify_user"]);
                     $changed = true;
                 }else{
-                    echo "Something went wrong";
+                    echo "<script>
+                        alert('Something went wrong');
+                    </script>";
                 }
             }else{
-               echo "Invalid current passkey"; 
+               echo "<script>
+                        alert('Invalid current passkey');
+                    </script>"; 
+                $changed = true;
             }
         }else{
-            echo "User not found";
+            echo "<script>
+                        alert('User not found');
+                 </script>";
         };
     };
     // loggedIn user details

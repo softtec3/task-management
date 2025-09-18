@@ -15,10 +15,14 @@
                 $_SESSION["user_id"] = $user_id;
                 header("Location: /task-management");
             }else{
-                echo "wrong password";
+                echo "<script>
+                        alert('Wrong Password');
+                    </script>";
             }
         }else{
-            echo "Invalid Credential";
+            echo "<script>
+                        alert('Invalid Credential');
+                 </script>";
         }
         
     }
