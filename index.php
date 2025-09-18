@@ -5,6 +5,7 @@
         header("Location: /task-management/login");
         exit();
     };
+    $changed = false;
     // Checking for profile page
     $user_id =  $_SESSION["user_id"];
     if(isset($_POST["passkey"])){
@@ -20,6 +21,7 @@
                 echo "<script>
                         alert('Password not matched');
                     </script>";
+                 $changed = true;
             }
         }else{
             echo "<script>
@@ -28,7 +30,7 @@
         }
     }
     // Passkey change
-    $changed = false;
+
     if(isset($_POST['currentPasskey'])){
         $current_passkey = $_POST["currentPasskey"];
         $new_passkey = $_POST["newPasskey"];
