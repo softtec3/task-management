@@ -1,5 +1,6 @@
 <?php
 ?>
+<!-- Pending task page -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -17,10 +18,12 @@
         <main class="main">
              <?php include_once("../components/topbar.php")?>
             <div class="newTasksContainer">
+                <!-- Running Task container -->
                 <div class="runningTask">
                     <h3>Running Task:</h3>
                     <p>Employee Management Development</p>
                 </div>
+                <!-- Pending tasks table -->
                 <div class="givenTasks">
                     <h2>Pending Tasks</h2>
                     <table>
@@ -70,6 +73,7 @@
                         </tbody>
                     </table>
                 </div>
+                <!-- Task view pupup -->
                 <div id="taskViewPopup">
                     <div class="taskViewContainer">
                         <span id="taskViewCloseBtn"><i class="fa-solid fa-xmark"></i></span>
@@ -79,6 +83,7 @@
             </div>
         </main>
     </section>
+    <!-- Js codes for popup open and close -->
     <script>
         const viewButtons = document.querySelectorAll(".viewButton");
         const taskViewPopup = document.getElementById("taskViewPopup");
@@ -87,13 +92,11 @@
         viewButtons.forEach(button => {
         button.addEventListener("click", () => {
             taskViewPopup.style.display = "flex";
-            console.log("Clicked");
         });
         });
 
         taskViewCloseBtn.addEventListener("click", () => {
         taskViewPopup.style.display = "none";
-        console.log("Clicked Close");
         });
     </script>
 </body>

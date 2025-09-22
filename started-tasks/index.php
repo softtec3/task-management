@@ -1,7 +1,7 @@
 <?php
 
 ?>
-
+<!-- Started Tasks page -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -18,11 +18,13 @@
         <?php include_once("../components/sidebar.php")?>
         <main class="main">
              <?php include_once("../components/topbar.php")?>
+             <!-- Running Task container -->
             <div class="newTasksContainer">
                 <div class="runningTask">
                     <h3>Running Task:</h3>
                     <p>Employee Management Development</p>
                 </div>
+                <!-- Running Task Table -->
                 <div class="givenTasks">
                     <h2>Started Tasks</h2>
                     <table>
@@ -72,6 +74,7 @@
                         </tbody>
                     </table>
                 </div>
+                <!-- Task view popup -->
                 <div id="taskViewPopup">
                     <div class="taskViewContainer">
                         <span id="taskViewCloseBtn"><i class="fa-solid fa-xmark"></i></span>
@@ -81,6 +84,7 @@
             </div>
         </main>
     </section>
+    <!-- Js codes for popup open and close -->
     <script>
         const viewButtons = document.querySelectorAll(".viewButton");
         const taskViewPopup = document.getElementById("taskViewPopup");
@@ -89,13 +93,11 @@
         viewButtons.forEach(button => {
         button.addEventListener("click", () => {
             taskViewPopup.style.display = "flex";
-            console.log("Clicked");
         });
         });
 
         taskViewCloseBtn.addEventListener("click", () => {
         taskViewPopup.style.display = "none";
-        console.log("Clicked Close");
         });
     </script>
 </body>

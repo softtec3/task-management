@@ -1,7 +1,7 @@
 <?php 
    
 ?>
-
+<!-- Profile page -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,10 +13,12 @@
 </head>
 <body>
     <section id="container">
+        <!-- profile page top bar -->
         <div class="topBar">
             <h2>Welcome Mr Tahmid Alam</h2>
             <h3>Status: <span style="color: orange">Review</span></h3>
         </div>
+        <!-- warning container -->
         <div class="warningContainer">
             <p class="warning"><i class="fa-solid fa-triangle-exclamation"></i>
                 This page of our system is governed by local state government.  Your information maybe accessed by the local government at any time for verification or necessity.
@@ -25,7 +27,7 @@
             </p>
         </div>
         <main class="main">
-            <!-- Personal Details -->
+            <!-- Personal Details Form -->
             <div class="detailsForm">
                 <div class="headingDiv">
                     <h3>Personal Details</h3>
@@ -139,7 +141,7 @@
                     </div>
                 </form>
             </div>
-            <!-- Essential Documents -->
+            <!-- Essential Documents Form -->
             <div class="detailsForm">
             <div class="headingDiv">
                 <h3>Essential Documents</h3>
@@ -232,7 +234,7 @@
                 </div>
             </form>
             </div>
-            <!-- Emergency Contact -->
+            <!-- Emergency Contact Form -->
             <div class="detailsForm">
             <div class="headingDiv">
                     <h3>Emergency Contact</h3>
@@ -296,7 +298,6 @@
         const imgPreviewInput = document.getElementById("imgPreviewInput");
         imgPreviewInput.addEventListener("change",(e)=>{
             const url = URL.createObjectURL(e.target.files[0]);
-            console.log(url);
             imgPreview.src = url;
         })
         // Container
@@ -343,48 +344,14 @@
         const zipcode = document.getElementById("zipcode");
         function handleCheckbox(checkbox) {
         if (checkbox.checked) {
-            // [permanentAddressStreetOne, permanentAddressStreetTwo, permanentCity, permanentState, permanentZipcode].forEach((elem)=>{
-            //     elem.disabled = true;
-            // });
             permanentAddressStreetOne.value = presentAddressStreetOne.value;
             permanentAddressStreetTwo.value = presentAddressStreetTwo.value;
             permanentCity.value = city.value;
             permanentState.value = state.value;
             permanentZipcode.value = zipcode.value;
-        } else {
-            //     [permanentAddressStreetOne, permanentAddressStreetTwo, permanentCity, permanentState, permanentZipcode].forEach((elem)=>{
-            //     elem.disabled = false;
-            // });
-        }
+        } 
         };
-        // // Personal Identification
-        // const personalIdType = document.getElementById("personalIdType");
-        // const ssnContainer = document.getElementById("ssnContainer");
-        // const itinContainer = document.getElementById("itinContainer");
-        // // const tinContainer = document.getElementById("tinContainer");
-
-        // personalIdType.addEventListener("change",(e)=>{
-        //     // Hide all first
-        //     [ssnContainer, itinContainer].forEach(container => {
-        //         container.style.display = "none";
-        //         container.querySelectorAll("input").forEach(input => input.required = false);
-        //     });
-
-        //     const value = e.target.value;
-
-        //     if(value === "ssn"){
-        //         ssnContainer.style.display = "block";
-        //         ssnContainer.querySelectorAll("input").forEach(input => input.required = true);
-        //     }
-        //     else if(value === "itin"){
-        //         itinContainer.style.display = "block";
-        //         itinContainer.querySelectorAll("input").forEach(input => input.required = true);
-        //     }
-        //     // else if(value === "tin"){
-        //     //     tinContainer.style.display = "block";
-        //     //     tinContainer.querySelectorAll("input").forEach(input => input.required = true);
-        //     // }
-        // });
+       
         const contactInput = document.getElementById("contactNumber");
         const numberType = document.getElementById("numberType");
 

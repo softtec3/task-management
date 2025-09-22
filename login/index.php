@@ -1,7 +1,7 @@
 <?php
     
 ?>
-
+<!-- Login page -->
 
 <!DOCTYPE html>
 <html lang="en">
@@ -15,6 +15,7 @@
 </head>
 <body>
     <section id="loginContainer">
+        <!-- login form -->
         <form action="" method="post" class="loginForm">
             <h1>Login</h1>
             <div class="formContainer">
