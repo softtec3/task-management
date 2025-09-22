@@ -15,8 +15,11 @@
     <section id="container">
         <!-- profile page top bar -->
         <div class="topBar">
-            <h2>Welcome Mr Tahmid Alam</h2>
-            <h3>Status: <span style="color: orange">Review</span></h3>
+            <h2>Welcome name here</h2>
+            <form action="">
+                <h3>Account status: <span style="color: orange">Review</span></h3>
+                <button class="btn">Logout</button>
+            </form>
         </div>
         <!-- warning container -->
         <div class="warningContainer">
@@ -30,7 +33,7 @@
             <!-- Personal Details Form -->
             <div class="detailsForm">
                 <div class="headingDiv">
-                    <h3>Personal Details</h3>
+                    <h3>Personal details</h3>
                     <p>Status: <span id="infoStatus" style="color:orange">Review</span></p>
                 </div>
                 <form action="" method="post" enctype="multipart/form-data">
@@ -39,38 +42,38 @@
                             <img id='imgPreview' src='./placeholder.jpg'>
                         </div>
                     <div class="formField">
-                        <label for="profileImage">Upload Your Photo <span class="required">*</span></label>
+                        <label for="profileImage">Upload your photo <span class="required">*</span></label>
                         <input id="imgPreviewInput" type="file" name="profileImage" required accept="image/*">
                     </div>
                     </div>
                     <div class="formFlex">
                         <div class="formField">
-                            <label for="firstName">First Name <span class="required">*</span></label>
+                            <label for="firstName">First name <span class="required">*</span></label>
                             <input type="text" name="firstName" required>
                         </div>
                         <div class="formField">
-                            <label for="lastName">Last Name <span class="required">*</span></label>
+                            <label for="lastName">Last name <span class="required">*</span></label>
                             <input type="text" name="lastName" required>
                         </div>                        
                     </div>
 
                     <div class="formField">
-                        <label for="fathersName">Father's Name <span class="required">*</span></label>
+                        <label for="fathersName">Father's name <span class="required">*</span></label>
                         <input type="text" name="fathersName" required>
                     </div>
 
                     <div class="presentAddressContainer">
-                        <h4>Present Address</h4>
-                    <div class="formFlex">
+                        <h4>Present address</h4>
+                    
                     <div class="formField">
-                        <label for="presentAddressStreetOne">Street Address 1 <span class="required">*</span></label>
+                        <label for="presentAddressStreetOne">Street address 1 <span class="required">*</span></label>
                         <input id="presentAddressStreetOne" type="text" name="presentAddressStreetOne" required>
                     </div>                        
                     <div class="formField">
-                        <label for="presentAddressStreetTwo">Street Address 2 (Optional)</label>
+                        <label for="presentAddressStreetTwo">Street address 2 <span class="optional">(Optional)</span></label>
                         <input id="presentAddressStreetTwo" type="text" name="presentAddressStreetTwo">
                     </div>                        
-                    </div>
+                   
                     <div class="formFlex">
                         <div class="formField">
                         <label for="city">City <span class="required">*</span></label>
@@ -87,7 +90,7 @@
                     </div>
                     <div class="formField">
                         <label for="country">Country <span class="required">*</span></label>
-                        <input id="country" type="text" name="country" value="USA" readonly>
+                        <input id="country" type="text" name="country" value="United States" readonly>
                     </div>
                     </div>
                     <div class="sameAs">
@@ -96,17 +99,16 @@
                     </div>
                 <!-- permanent address -->
                     <div class="permanentAddressContainer">
-                        <h4>Permanent Address</h4>
-                    <div class="formFlex">
+                        <h4>Permanent address</h4>
+                   
                     <div class="formField">
-                        <label for="permanentAddressStreetOne">Street Address 1 <span class="required">*</span></label>
+                        <label for="permanentAddressStreetOne">Street address 1 <span class="required">*</span></label>
                         <input id="permanentAddressStreetOne" type="text" name="permanentAddressStreetOne" required>
                     </div>                        
                     <div class="formField">
-                        <label for="permanentAddressStreetTwo">Street Address 2 (Optional)</label>
+                        <label for="permanentAddressStreetTwo">Street address 2 <span class="optional"><span class="optional">(Optional)</span></span></label>
                         <input id="permanentAddressStreetTwo" type="text" name="permanentAddressStreetTwo">
                     </div>                        
-                    </div>
                     <div class="formFlex">
                         <div class="formField">
                         <label for="permanentCity">City <span class="required">*</span></label>
@@ -123,19 +125,25 @@
                     </div>
                     <div class="formField">
                         <label for="country">Country <span class="required">*</span></label>
-                        <input id="country" type="text" name="country" value="USA" readonly>
+                        <input id="country" type="text" name="country" value="United States" readonly>
                     </div>
                     </div>
+                    
+                    <div class="formFlex2">
                     <div class="formField">
                     <div id="numberCode">
-                        <label for="contactNumber">Contact No</label>
+                        <label for="contactNumber" style="min-width: 90px;">Contact no <span class="required">*</span></label>
                         <select name="numberType" id="numberType">
                             <option value="usa">USA +1</option>
-                            <option value="bangladesh">Bangladesh +880</option>
+                            <option value="bangladesh">BD+880</option>
                         </select>
                     </div>
+                    </div>
+                     <div class="formField">
                     <input type="text" id="contactNumber" name="contactNumber" value="+1" required>
                     </div>
+                    </div>
+
                     <div class="formField">
                         <button type="submit" class="saveChangesBtn">Update</button>
                     </div>
@@ -144,12 +152,12 @@
             <!-- Essential Documents Form -->
             <div class="detailsForm">
             <div class="headingDiv">
-                <h3>Essential Documents</h3>
+                <h3>Essential documents</h3>
                 <p>Status: <span id="infoStatus" style="color: orange">Review</span></p>
             </div>
             <form action="" method="post" enctype="multipart/form-data">
                 <div class="formField">
-                <label for="addMore">Add More Document </label>
+                <label for="addMore">Document type </label>
                 <select name="documentType" id="documentType" required>
                     <option style="display: none;" value="">Select Type</option>
                     <option value="passport">passport</option>
@@ -160,28 +168,28 @@
 
                <div id="passportContainer">
                 <div class="formField">
-                <label for="passportNo">Passport No</label>
-                <input type="text" name="passportNo">
+                <label for="passportNo">Passport no <span class="required">*</span></label>
+                <input type="text" name="passportNo" required>
                 </div>
                 <div class="formField">
-                <label for="passportPhoto">Photo of Passport</label>
-                <input type="file" name="passportPhoto" accept="image/*">
+                <label for="passportPhoto">Passport information page picture <span class="required">*</span></label>
+                <input type="file" name="passportPhoto" accept="image/*" required>
                 </div>
                 </div>
 
                <div id="drivingLicenseContainer">
                 <div class="formField">
-                <label for="drivingLicenseNo">Driving License No</label>
-                <input type="text" name="drivingLicenseNo">
+                <label for="drivingLicenseNo">Driving license no <span class="required">*</span></label>
+                <input type="text" name="drivingLicenseNo" required>
                 </div>
                 <div class="formFlex">
                 <div class="formField">
-                <label for="drivingLicenseFrontPhoto">Driving License Front Photo</label>
-                <input type="file" name="drivingLicenseFrontPhoto" accept="image/*">
+                <label for="drivingLicenseFrontPhoto">Driving license front photo <span class="required">*</span></label>
+                <input type="file" name="drivingLicenseFrontPhoto" accept="image/*" required>
                 </div>
                 <div class="formField">
-                <label for="drivingLicenseBackPhoto">Driving License Back Photo</label>
-                <input type="file" name="drivingLicenseBackPhoto" accept="image/*">
+                <label for="drivingLicenseBackPhoto">Driving license back photo <span class="required">*</span></label>
+                <input type="file" name="drivingLicenseBackPhoto" accept="image/*" required>
                 </div>                    
                 </div>
 
@@ -190,17 +198,17 @@
 
                 <div id="voterIdCardContainer">
                 <div class="formField">
-                <label for="voterCardNo">Voter Card No</label>
-                <input type="text" name="voterCardNo">
+                <label for="voterCardNo">Voter card no <span class="required">*</span></label>
+                <input type="text" name="voterCardNo" required>
                 </div>
                 <div class="formFlex">
                 <div class="formField">
-                <label for="voterCardFrontPhoto">Voter Card Front Photo</label>
-                <input type="file" name="voterCardFrontPhoto" accept="image/*">
+                <label for="voterCardFrontPhoto">Voter card front photo <span class="required">*</span></label>
+                <input type="file" name="voterCardFrontPhoto" accept="image/*" required>
                 </div>
                 <div class="formField">
-                <label for="voterCardBackPhoto">Voter Card Back Photo</label>
-                <input type="file" name="voterCardBackPhoto" accept="image/*">
+                <label for="voterCardBackPhoto">Voter card back photo <span class="required">*</span></label>
+                <input type="file" name="voterCardBackPhoto" accept="image/*" required>
                 </div>                    
                 </div>
 
@@ -209,23 +217,23 @@
                 <!-- SSN -->
                 <div id="ssnContainer">
                     <div class="formField">
-                        <label for="ssnNo">SSN No <span class="required">*</span></label>
+                        <label for="ssnNo">SSN no <span class="required">*</span></label>
                         <input type="text" name="ssnNo" required maxlength="9">
                     </div>
                     <div class="formField">
-                        <label for="ssnPhoto">Photo of SSN Card <span class="required">*</span></label>
-                        <input type="file" name="ssnPhoto" accept="image/*" required>
+                        <label for="ssnPhoto">Photo of SSN card <span class="optional">(Optional)</span></label>
+                        <input type="file" name="ssnPhoto" accept="image/*">
                     </div>
                 </div>
 
                 <!-- ITIN -->
                 <div id="itinContainer">
                     <div class="formField">
-                        <label for="itinNo">ITIN No</label>
+                        <label for="itinNo">ITIN no <span class="optional">(Optional)</span></label>
                         <input type="text" name="itinNo" maxlength="9">
                     </div>
                     <div class="formField">
-                        <label for="itinPhoto">Photo of ITIN Letter</label>
+                        <label for="itinPhoto">Photo of ITIN letter <span class="optional">(Optional)</span></label>
                         <input type="file" name="itinPhoto" accept="image/*">
                     </div>
                 </div>
@@ -235,16 +243,17 @@
             </form>
             </div>
             <!-- Emergency Contact Form -->
-            <div class="detailsForm">
+            <div class="detailsForm" id="emergency">
             <div class="headingDiv">
-                    <h3>Emergency Contact</h3>
+                    <h3>Emergency contact</h3>
                     <p>Status: <span id="infoStatus" style="color:orange">Review</span></p>
             </div>
-            <form action="" method="post">
+            <form action="" method="post" class="contactForm">
                 <!-- Contact 1 -->
-                <h4>Contact 1</h4>
+                 <div class="contactContainer">
+                <h4>Contact 1 <span class="required">*</span></h4>
                 <div class="formField">
-                <label for="emergencyName1">Full Name <span class="required">*</span></label>
+                <label for="emergencyName1">Full name <span class="required">*</span></label>
                 <input type="text" name="emergencyName1" required>
                 </div>
                 <div class="formField">
@@ -252,14 +261,16 @@
                 <input type="text" name="emergencyRelation1" required>
                 </div>
                 <div class="formField">
-                <label for="emergencyPhone1">Contact Number <span class="required">*</span></label>
+                <label for="emergencyPhone1">Contact number <span class="required">*</span></label>
                 <input type="text" name="emergencyPhone1" required>
                 </div>
+                 </div>
 
+                <div class="contactContainer">
                 <!-- Contact 2 -->
-                <h4>Contact 2</h4>
+                <h4>Contact 2 <span class="optional">(Optional)</span></h4>
                 <div class="formField">
-                <label for="emergencyName2">Full Name</label>
+                <label for="emergencyName2">Full name </label>
                 <input type="text" name="emergencyName2">
                 </div>
                 <div class="formField">
@@ -267,14 +278,17 @@
                 <input type="text" name="emergencyRelation2">
                 </div>
                 <div class="formField">
-                <label for="emergencyPhone2">Contact Number</label>
+                <label for="emergencyPhone2">Contact number</label>
                 <input type="text" name="emergencyPhone2">
                 </div>
+                </div>
+                <div class="contactContainer">
 
+                
                 <!-- Contact 3 -->
-                <h4>Contact 3</h4>
+                <h4>Contact 3 <span class="optional">(Optional)</span></h4>
                 <div class="formField">
-                <label for="emergencyName3">Full Name</label>
+                <label for="emergencyName3">Full name</label>
                 <input type="text" name="emergencyName3">
                 </div>
                 <div class="formField">
@@ -282,12 +296,13 @@
                 <input type="text" name="emergencyRelation3">
                 </div>
                 <div class="formField">
-                <label for="emergencyPhone3">Contact Number</label>
+                <label for="emergencyPhone3">Contact number</label>
                 <input type="text" name="emergencyPhone3">
                 </div>
                 <div class="formField">
                         <button type="submit" class="saveChangesBtn">Update</button>
                 </div>
+            </div>
             </form>
             </div>
 

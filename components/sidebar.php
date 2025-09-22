@@ -6,9 +6,20 @@
                 <img src='./placeholder.jpg'>
             </div>
             <div class="proDesc">
-                <p>101</p>
-                <p>Tahmid Alam</p>
-                <p>Development</p>
+                <table>
+                    <tr>
+                        <th>ID:</th>
+                        <td>101</td>
+                    </tr>
+                    <tr>
+                        <th>Name:</th>
+                        <td>Name here</td>
+                    </tr>
+                    <tr>
+                        <th>Department:</th>
+                        <td>Development</td>
+                    </tr>
+                </table>
                 <button id="loginBtn" class="loginBtn">Profile Login</button>
             </div>
            </div>
@@ -30,7 +41,7 @@
                     <form action="" method="post" class="passkeyContainer">
                         <label for="passkey">Passkey</label>
                         <div class="inputField">
-                            <input type="number" name="passkey" placeholder="5 Digits" required maxlength="5">
+                            <input type="text" name="passkey" placeholder="5 Digits" required maxlength="5" id="onlyNumber">
                             <button type="submit">Submit</button>
                         </div>
                     </form>
@@ -100,5 +111,10 @@
             changeBtn.disabled = false;
         }
     })
+    // number
+    const input = document.getElementById("onlyNumber");
+    input.addEventListener("input", function () {
+    this.value = this.value.replace(/[^0-9]/g, "");
+    });
     
 </script>

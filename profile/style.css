@@ -30,9 +30,39 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  position: sticky;
+  left: 0;
+  top: 0;
+  background-color: white;
 }
-.topBar h3 {
+.topBar form {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+.btn {
+  padding: 5px 10px;
+  border-radius: 5px;
+  border: none;
+  background-color: var(--primaryColor);
+  color: #01132e;
+  display: block;
+  font-weight: 600;
+  cursor: pointer;
+  font-size: 16px;
+}
+/* .topBar h3 {
   text-transform: capitalize;
+} */
+.presentAddressContainer h4 {
+  margin-bottom: 10px;
+}
+.permanentAddressContainer h4 {
+  margin-bottom: 10px;
+}
+.optional {
+  color: gray;
 }
 .main .detailsForm {
   box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
@@ -58,6 +88,13 @@ select {
   font-size: 17px;
   outline: none;
   width: 100%;
+}
+#numberCode select {
+  border: 1px solid gainsboro;
+  border-radius: 3px;
+  padding: 7px;
+  font-size: 17px;
+  outline: none;
 }
 .formField select {
   text-transform: uppercase;
@@ -94,6 +131,8 @@ select {
   cursor: pointer;
   font-size: 16px;
   font-weight: bold;
+  width: 150px;
+  margin: 0 auto;
 }
 .warningContainer {
   box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
@@ -135,6 +174,11 @@ select {
   align-items: center;
   gap: 10px;
 }
+.formFlex2 {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
 .formFlex .formField {
   width: 100%;
 }
@@ -146,6 +190,28 @@ select {
   gap: 5px;
 }
 #numberCode select {
-  max-width: 200px;
-  padding: 2px;
+  max-width: 100px;
+}
+#emergency form h4 {
+  margin-bottom: 10px;
+}
+.contactContainer {
+  border: 1px solid gainsboro;
+  padding: 8px;
+  margin-bottom: 20px;
+  border-radius: 3px;
+}
+.contactContainer h4 {
+  text-align: center;
+  background-color: white;
+  max-width: 170px;
+  margin: 0 auto;
+  margin-top: -18px;
+  display: flex;
+  gap: 5px;
+  text-align: center;
+  justify-content: center;
+}
+.contactForm {
+  padding: 10px;
 }

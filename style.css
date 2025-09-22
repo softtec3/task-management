@@ -63,17 +63,25 @@ a {
 .proDesc p {
   font-weight: bold;
 }
+.proDesc table th {
+  text-align: left;
+  padding-right: 8px;
+}
+.proDesc table td {
+  text-align: left;
+}
 .loginBtn {
   padding: 5px 10px;
   border-radius: 5px;
   border: none;
   background-color: var(--primaryColor);
   color: #01132e;
-  margin-top: 15px;
   display: block;
   font-weight: 600;
   cursor: pointer;
   font-size: 16px;
+  margin: 0 auto;
+  margin-top: 15px;
 }
 .btn {
   padding: 5px 10px;
@@ -360,4 +368,13 @@ a {
   text-align: center;
   font-size: 14px;
   color: red;
+}
+.passField {
+  position: relative;
+}
+#eyeIcon {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  cursor: pointer;
 }

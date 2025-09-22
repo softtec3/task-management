@@ -20,12 +20,15 @@
             <h1>Login</h1>
             <div class="formContainer">
                 <div>
-                    <label for="user_id">User Id</label>
-                    <input type="text" name="user_id" placeholder="Enter your user id">
+                    <label for="employee_id">Employee id</label>
+                    <input type="text" name="employee_id" placeholder="Enter your employee id">
                 </div>
                 <div>
                     <label for="password">Password</label>
-                    <input type="password" name="password" placeholder="Enter your password">
+                    <div class="passField">
+                        <input type="password" name="password" placeholder="Enter your password" id="passField">
+                        <span id="eyeIcon"><i class="fa-solid fa-eye"></i></span>
+                    </div>
                 </div>
                 <div>
                     <button type="submit" class="btn">Login</button>
@@ -33,5 +36,16 @@
             </div>
         </form>
     </section>
+    <script>
+        const passField =document.getElementById("passField");
+        const eyeIcon = document.getElementById("eyeIcon");
+        eyeIcon.addEventListener("click",()=>{
+              if (passField.type === "password") {
+                passField.type = "text";
+              } else {
+                 passField.type = "password";
+            }
+        })
+    </script>
 </body>
 </html>
