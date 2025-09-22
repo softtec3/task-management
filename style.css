@@ -66,6 +66,10 @@ a {
 .proDesc table th {
   text-align: left;
   padding-right: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2px;
 }
 .proDesc table td {
   text-align: left;

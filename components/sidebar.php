@@ -8,15 +8,15 @@
             <div class="proDesc">
                 <table>
                     <tr>
-                        <th>ID:</th>
+                        <th>ID <span>:</span></th>
                         <td>101</td>
                     </tr>
                     <tr>
-                        <th>Name:</th>
+                        <th>Name <span>:</span></th>
                         <td>Name here</td>
                     </tr>
                     <tr>
-                        <th>Department:</th>
+                        <th>Department <span>:</span></th>
                         <td>Development</td>
                     </tr>
                 </table>
