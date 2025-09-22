@@ -1,5 +1,4 @@
 <?php
- include_once("../protected.php");
 ?>
 
 <!DOCTYPE html>

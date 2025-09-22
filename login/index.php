@@ -1,32 +1,5 @@
 <?php
-    include_once("../php/config.php");
-    session_start();
-    if (isset($_SESSION["user_id"])) {
-        header("Location: /task-management");
-        exit();
-    }
-    if(isset($_POST["user_id"])){
-        $user_id = $_POST["user_id"];
-        $password = $_POST["password"];
-        $fetch_info = $conn->query("SELECT * FROM employee_log WHERE employee_id='$user_id'");
-        $info = $fetch_info->fetch();;
-        if($info){
-            if($info["password"] == $password){
-                $_SESSION["user_id"] = $user_id;
-                header("Location: /task-management");
-            }else{
-                echo "<script>
-                        alert('Wrong Password');
-                    </script>";
-            }
-        }else{
-            echo "<script>
-                        alert('Invalid Credential');
-                 </script>";
-        }
-        
-    }
-
+    
 ?>
 
 

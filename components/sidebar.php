@@ -1,26 +1,11 @@
 <aside class="sidebar">
            <div class="profile">
             <div class="proImg">
-                <?php 
-                $path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
-                $path = rtrim($path, '/');
-                 $url="";
-                if ($path === "/task-management") {
-                    $url = "./uploads/". $logged_user['profile_image'];
-                } else {
-                   $url = "../uploads/". $logged_user['profile_image'];
-                }
-                    if($logged_user["profile_image"]){
-                    
-                     echo "<img  src='$url'>";
-                    }else{
-                         echo "<img src='./placeholder.jpg'>";
-                    }
-                ?>
+                <img src='./placeholder.jpg'>
             </div>
             <div class="proDesc">
-                <p><?php echo $logged_user["employee_id"];?></p>
-                <p><?php echo $logged_user["first_name"]." ". $logged_user["last_name"];?></p>
+                <p>101</p>
+                <p>Tahmid Alam</p>
                 <p>Development</p>
                 <button id="loginBtn" class="loginBtn">Profile Login</button>
             </div>
@@ -33,13 +18,7 @@
             <a href="/task-management/pending-tasks"><i class="fas fa-hourglass-half"></i> Pending Tasks</a>
            </div>
 
-           <div id="loginPopup" style="display: <?php 
-            if($changed){
-                echo "flex";
-            }else{
-                echo "none";
-            };
-           ?>;">
+           <div id="loginPopup" style="display:none">
             <div class="loginPopupContainer">
             <span id="loginPopupCloseBtn"><i class="fa-solid fa-xmark"></i></span>
                 <div id="loginDefault" class="loginDefault">

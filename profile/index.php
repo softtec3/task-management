@@ -1,198 +1,5 @@
 <?php 
-    session_start();
-    $logged_user_id = $_SESSION["verify_user"];
-    if(!isset($_SESSION["verify_user"])){
-        header("Location: /task-management");
-        exit();
-    }
-    include_once("../php/config.php");
-    $prev_data = $conn->query("SELECT * FROM employees WHERE employee_id='$logged_user_id'");
-    $fetched_data = $prev_data->fetchAll();
-    // if($fetched_data){
-    //     echo "<pre>";
-    //     print_r($fetched_data);
-    // }
-// File upload function
-// upload file and get name
-  function upload_file_get_name($name){
-   if($_FILES["$name"]){
-    $path = "../uploads/".$_FILES["$name"]["name"];
-    $file_name = $_FILES["$name"]["name"];
-    move_uploaded_file($_FILES["$name"]["tmp_name"], $path);
-    return $file_name;
-  }else{
-    echo "Something went Wrong";
-  };
-  };
-    // Update Personal Details
-    if(isset($_POST["firstName"])){
-        // Profile Information
-        $profile_image = upload_file_get_name("profileImage");
-        $first_name = $_POST["firstName"];
-        $last_name = $_POST["lastName"];
-        $fathers_name = $_POST["fathersName"];
-
-        // Present Address
-        $present_address_street_one = $_POST["presentAddressStreetOne"];
-        $present_address_street_two = $_POST["presentAddressStreetTwo"];
-        $present_city = $_POST["city"];
-        $present_state = $_POST["state"];
-        $present_zipcode = $_POST["zipcode"];
-        $present_country = $_POST["country"]; // default "USA"
-
-        // Permanent Address
-        $permanent_address_street_one = $_POST["permanentAddressStreetOne"];
-        $permanent_address_street_two = $_POST["permanentAddressStreetTwo"];
-        $permanent_city = $_POST["permanentCity"];
-        $permanent_state = $_POST["permanentState"];
-        $permanent_zipcode = $_POST["permanentZipcode"];
-        $permanent_country = $_POST["country"];
-
-        // Contact Info
-        $contact_number = $_POST["contactNumber"];
-        $update_info = $conn->prepare("UPDATE personal_details SET 
-        profile_image = '$profile_image',
-        first_name = '$first_name',
-        last_name = '$last_name',
-        fathers_name = '$fathers_name',
-        present_street1 = '$present_address_street_one',
-        present_street2 = '$present_address_street_two',
-        present_city = '$present_city',
-        present_state = '$present_state',
-        present_zipcode = '$present_zipcode',
-        present_country = '$present_country',
-        permanent_street1 = '$permanent_address_street_one',
-        permanent_street2 = '$permanent_address_street_two',
-        permanent_city = '$permanent_city',
-        permanent_state = '$present_state',
-        permanent_zipcode = '$permanent_zipcode',
-        permanent_country = '$permanent_country',
-        contact_number = '$contact_number',
-        status='review'
-        WHERE employee_id='$logged_user_id'
-        ");
-        $updated_personal_details = $update_info->execute();
-        if($updated_personal_details){
-            header("Location: index.php");
-        }else{
-            return null;
-        };
-    };
-    // Update Emergency contact
-    if(isset($_POST["emergencyName1"])){
-        $e_full_name_one = $_POST["emergencyName1"];
-        $e_full_relation_one = $_POST["emergencyRelation1"];
-        $e_full_contact_one = $_POST["emergencyPhone1"];
-        $e_full_name_two = $_POST["emergencyName2"];
-        $e_full_relation_two = $_POST["emergencyRelation2"];
-        $e_full_contact_two = $_POST["emergencyPhone2"];
-        $e_full_name_three = $_POST["emergencyName3"];
-        $e_full_relation_three = $_POST["emergencyRelation3"];
-        $e_full_contact_three = $_POST["emergencyPhone3"];
-
-        $update_emergency_contact = $conn->prepare("UPDATE emergency_contact SET e_full_name_one='$e_full_name_one', e_full_relation_one='$e_full_relation_one', e_full_contact_one='$e_full_contact_one', e_full_name_two='$e_full_name_two', e_full_relation_two='$e_full_relation_two', e_full_contact_two='$e_full_contact_two', e_full_name_three='$e_full_name_three',  e_full_relation_three='$e_full_relation_three', e_full_contact_three='$e_full_contact_three',
-        status='review'
-        WHERE employee_id='$logged_user_id'");
-        
-        $updated_emergency_contact = $update_emergency_contact->execute();
-        if($updated_emergency_contact){
-            header("Location: index.php");
-        }else{
-            echo "Something went wrong";
-        };
-    };
-    // Update Essential Documents
-    if(isset($_POST["essential"])){
-    // essential Documents
-    $passport_no  = $_POST["passportNo"];
-    $driving_license_no = $_POST["drivingLicenseNo"];
-    $voter_id_no = $_POST["voterCardNo"];
-    $ssn_no = $_POST["ssnNo"];
-    $itin_no = $_POST["itinNo"];
-    if($passport_no && $_FILES["passportPhoto"]){
-        $passport_photo = upload_file_get_name("passportPhoto");
-        $update_passport = $conn->prepare("UPDATE essential_documents SET passport_no='$passport_no', passport_photo='$passport_photo', status='review' WHERE employee_id='$logged_user_id'");
-        $updated_passport = $update_passport->execute();
-        if($updated_passport){
-            header("Location: index.php");
-        }else{
-            return null;
-        };
-    };
-
-    if($driving_license_no){
-    $driving_license_front_photo = upload_file_get_name("drivingLicenseFrontPhoto");
-    $driving_license_back_photo  = upload_file_get_name("drivingLicenseBackPhoto");
-
-    $update_driving_license = $conn->prepare("UPDATE essential_documents SET driving_license_no='$driving_license_no', driving_license_front='$driving_license_front_photo',
-    driving_license_back='$driving_license_back_photo',
-    status='review'
-    WHERE employee_id='$logged_user_id'");
-        $updated_driving_license = $update_driving_license->execute();
-        if($updated_driving_license){
-            header("Location: index.php");
-        }else{
-            return null;
-        };
-    };
-    if($voter_id_no){
-    $voter_card_front_photo = upload_file_get_name("voterCardFrontPhoto");
-    $voter_card_back_photo  = upload_file_get_name("voterCardBackPhoto");
-
-    $update_voter_card = $conn->prepare("UPDATE essential_documents SET voter_card_no='$voter_id_no', voter_card_front='$voter_card_front_photo',
-    voter_card_back='$voter_card_back_photo',
-    status='review'
-    WHERE employee_id='$logged_user_id'");
-        $updated_voter_card = $update_voter_card->execute();
-        if($updated_voter_card){
-            header("Location: index.php");
-        }else{
-            return null;
-        };
-
-    };
-    if($ssn_no){
-    $ssn_photo = upload_file_get_name("ssnPhoto");
-    $update_ssn = $conn->prepare("UPDATE essential_documents SET ssn_no='$ssn_no', ssn_photo='$ssn_photo', status='review' WHERE employee_id='$logged_user_id'");
-
-        $updated_ssn = $update_ssn->execute();
-        if($updated_ssn){
-            header("Location: index.php");
-        }else{
-            return null;
-        };
-    };
-    if($itin_no){
-    $itin_photo = upload_file_get_name("itinPhoto");
-
-    $update_itin = $conn->prepare("UPDATE essential_documents SET itin_no='$itin_no', itin_photo='$itin_photo',
-    status='review'
-    WHERE employee_id='$logged_user_id'");
-        $updated_itin = $update_itin->execute();
-        if($updated_itin){
-            header("Location: index.php");
-        }else{
-            return null;
-        };
-    };
-    
-    };
-
-    // Getting status
-
-    // Personal Details Status
-    $personal_details_status = $conn->query("SELECT `status` FROM personal_details WHERE employee_id='$logged_user_id'");
-    $p_details = $personal_details_status->fetch();
-    // Emergency Contact Status
-    $emergency_contact_status = $conn->query("SELECT `status` FROM emergency_contact WHERE employee_id='$logged_user_id'");
-    $e_contact = $emergency_contact_status->fetch();
-    // Essential Documents Status
-    $essential_documents_status = $conn->query("SELECT `status` FROM essential_documents WHERE employee_id='$logged_user_id'");
-    $e_documents = $essential_documents_status->fetch();
-    // Main Profile Status
-    $main_employee_status = $conn->query("SELECT `status` FROM employees WHERE employee_id='$logged_user_id'");
-    $m_employee = $main_employee_status->fetch();
-
+   
 ?>
 
 <!DOCTYPE html>
@@ -208,13 +15,7 @@
     <section id="container">
         <div class="topBar">
             <h2>Welcome Mr Tahmid Alam</h2>
-            <h3>Status: <span style="color: <?php if($p_details["status"]!=="approved"){
-                        echo "orange";
-                    }else{
-                        echo "green";
-                    }
-                    
-                    ?>;"><?php echo $m_employee["status"]?></span></h3>
+            <h3>Status: <span style="color: orange">Review</span></h3>
         </div>
         <div class="warningContainer">
             <p class="warning"><i class="fa-solid fa-triangle-exclamation"></i>
@@ -228,25 +29,12 @@
             <div class="detailsForm">
                 <div class="headingDiv">
                     <h3>Personal Details</h3>
-                    <p>Status: <span id="infoStatus" style="color: <?php if($p_details["status"]!=="approved"){
-                        echo "orange";
-                    }else{
-                        echo "green";
-                    }
-                    
-                    ?>;"><?php echo $p_details["status"]?></span></p>
+                    <p>Status: <span id="infoStatus" style="color:orange">Review</span></p>
                 </div>
                 <form action="" method="post" enctype="multipart/form-data">
                     <div class="profileImageUpload">
                         <div class="profileImageContainer">
-                            <?php 
-                            if($fetched_data[0]["profile_image"]){
-                            $url = "../uploads/". $fetched_data[0]['profile_image'];
-                              echo "<img id='imgPreview' src='$url'>";
-                            }else{
-                                 echo "<img id='imgPreview' src='./placeholder.jpg'>";
-                            }
-                            ?>
+                            <img id='imgPreview' src='./placeholder.jpg'>
                         </div>
                     <div class="formField">
                         <label for="profileImage">Upload Your Photo <span class="required">*</span></label>
@@ -256,19 +44,17 @@
                     <div class="formFlex">
                         <div class="formField">
                             <label for="firstName">First Name <span class="required">*</span></label>
-                            <input type="text" name="firstName" required value="<?php echo $fetched_data[0]['first_name']?>">
+                            <input type="text" name="firstName" required>
                         </div>
                         <div class="formField">
                             <label for="lastName">Last Name <span class="required">*</span></label>
-                            <input type="text" name="lastName" required value="<?php echo $fetched_data[0]['last_name']?>">
+                            <input type="text" name="lastName" required>
                         </div>                        
                     </div>
 
                     <div class="formField">
                         <label for="fathersName">Father's Name <span class="required">*</span></label>
-                        <input type="text" name="fathersName" required value="<?php
-                        echo $fetched_data[0]["fathers_name"];
-                         ?>">
+                        <input type="text" name="fathersName" required>
                     </div>
 
                     <div class="presentAddressContainer">
@@ -276,25 +62,25 @@
                     <div class="formFlex">
                     <div class="formField">
                         <label for="presentAddressStreetOne">Street Address 1 <span class="required">*</span></label>
-                        <input id="presentAddressStreetOne" type="text" name="presentAddressStreetOne" required value="<?php echo $fetched_data[0]['present_street1']?>">
+                        <input id="presentAddressStreetOne" type="text" name="presentAddressStreetOne" required>
                     </div>                        
                     <div class="formField">
                         <label for="presentAddressStreetTwo">Street Address 2 (Optional)</label>
-                        <input id="presentAddressStreetTwo" type="text" name="presentAddressStreetTwo" value="<?php echo $fetched_data[0]['present_street2']?>" >
+                        <input id="presentAddressStreetTwo" type="text" name="presentAddressStreetTwo">
                     </div>                        
                     </div>
                     <div class="formFlex">
                         <div class="formField">
                         <label for="city">City <span class="required">*</span></label>
-                        <input id="city" type="text" name="city"  required value="<?php echo $fetched_data[0]['present_city']?>">
+                        <input id="city" type="text" name="city"  required>
                         </div>   
                         <div class="formField">
                         <label for="state">State <span class="required">*</span></label>
-                        <input id="state" type="text" name="state" required value="<?php echo $fetched_data[0]['present_state']?>">
+                        <input id="state" type="text" name="state" required>
                         </div>   
                         <div class="formField">
                         <label for="zipcode">Zipcode <span class="required">*</span></label>
-                        <input id="zipcode" type="text" name="zipcode" required value="<?php echo $fetched_data[0]['present_zipcode']?>">
+                        <input id="zipcode" type="text" name="zipcode" required>
                         </div>   
                     </div>
                     <div class="formField">
@@ -312,25 +98,25 @@
                     <div class="formFlex">
                     <div class="formField">
                         <label for="permanentAddressStreetOne">Street Address 1 <span class="required">*</span></label>
-                        <input id="permanentAddressStreetOne" type="text" name="permanentAddressStreetOne" required value="<?php echo $fetched_data[0]['permanent_street1']?>">
+                        <input id="permanentAddressStreetOne" type="text" name="permanentAddressStreetOne" required>
                     </div>                        
                     <div class="formField">
                         <label for="permanentAddressStreetTwo">Street Address 2 (Optional)</label>
-                        <input id="permanentAddressStreetTwo" type="text" name="permanentAddressStreetTwo" value="<?php echo $fetched_data[0]['permanent_street2']?>">
+                        <input id="permanentAddressStreetTwo" type="text" name="permanentAddressStreetTwo">
                     </div>                        
                     </div>
                     <div class="formFlex">
                         <div class="formField">
                         <label for="permanentCity">City <span class="required">*</span></label>
-                        <input id="permanentCity" type="text" name="permanentCity"  required value="<?php echo $fetched_data[0]['permanent_city']?>">
+                        <input id="permanentCity" type="text" name="permanentCity"  required>
                         </div>   
                         <div class="formField">
                         <label for="permanentState">State <span class="required">*</span></label>
-                        <input id="permanentState" type="text" name="permanentState" required value="<?php echo $fetched_data[0]['permanent_state']?>">
+                        <input id="permanentState" type="text" name="permanentState" required>
                         </div>   
                         <div class="formField">
                         <label for="permanentZipcode">Zipcode <span class="required">*</span></label>
-                        <input id="permanentZipcode" type="text" name="permanentZipcode" required value="<?php echo $fetched_data[0]['permanent_zipcode']?>">
+                        <input id="permanentZipcode" type="text" name="permanentZipcode" required>
                         </div>   
                     </div>
                     <div class="formField">
@@ -346,7 +132,7 @@
                             <option value="bangladesh">Bangladesh +880</option>
                         </select>
                     </div>
-                    <input type="text" id="contactNumber" name="contactNumber" value="+1" required value="<?php echo $fetched_data[0]['contact_number']?>">
+                    <input type="text" id="contactNumber" name="contactNumber" value="+1" required>
                     </div>
                     <div class="formField">
                         <button type="submit" class="saveChangesBtn">Update</button>
@@ -357,13 +143,7 @@
             <div class="detailsForm">
             <div class="headingDiv">
                 <h3>Essential Documents</h3>
-                <p>Status: <span id="infoStatus" style="color: <?php if($p_details["status"]!=="approved"){
-                        echo "orange";
-                    }else{
-                        echo "green";
-                    }
-                    
-                    ?>;"><?php echo $e_documents["status"]?></span></p>
+                <p>Status: <span id="infoStatus" style="color: orange">Review</span></p>
             </div>
             <form action="" method="post" enctype="multipart/form-data">
                 <div class="formField">
@@ -456,76 +236,52 @@
             <div class="detailsForm">
             <div class="headingDiv">
                     <h3>Emergency Contact</h3>
-                    <p>Status: <span id="infoStatus" style="color: <?php if($p_details["status"]!=="approved"){
-                        echo "orange";
-                    }else{
-                        echo "green";
-                    }
-                    
-                    ?>;"><?php echo $e_contact["status"]?></span></p>
+                    <p>Status: <span id="infoStatus" style="color:orange">Review</span></p>
             </div>
             <form action="" method="post">
                 <!-- Contact 1 -->
                 <h4>Contact 1</h4>
                 <div class="formField">
                 <label for="emergencyName1">Full Name <span class="required">*</span></label>
-                <input type="text" name="emergencyName1" required value="<?php
-                        echo $fetched_data[0]["e_full_name_one"];
-                         ?>">
+                <input type="text" name="emergencyName1" required>
                 </div>
                 <div class="formField">
                 <label for="emergencyRelation1">Relationship <span class="required">*</span></label>
-                <input type="text" name="emergencyRelation1" required value="<?php
-                        echo $fetched_data[0]["e_full_relation_one"];
-                         ?>">
+                <input type="text" name="emergencyRelation1" required>
                 </div>
                 <div class="formField">
                 <label for="emergencyPhone1">Contact Number <span class="required">*</span></label>
-                <input type="text" name="emergencyPhone1" required value="<?php
-                        echo $fetched_data[0]["e_full_contact_one"];
-                         ?>">
+                <input type="text" name="emergencyPhone1" required>
                 </div>
 
                 <!-- Contact 2 -->
                 <h4>Contact 2</h4>
                 <div class="formField">
                 <label for="emergencyName2">Full Name</label>
-                <input type="text" name="emergencyName2" value="<?php
-                        echo $fetched_data[0]["e_full_name_two"];
-                         ?>">
+                <input type="text" name="emergencyName2">
                 </div>
                 <div class="formField">
                 <label for="emergencyRelation2">Relationship</label>
-                <input type="text" name="emergencyRelation2" value="<?php
-                        echo $fetched_data[0]["e_full_relation_two"];
-                         ?>">
+                <input type="text" name="emergencyRelation2">
                 </div>
                 <div class="formField">
                 <label for="emergencyPhone2">Contact Number</label>
-                <input type="text" name="emergencyPhone2" value="<?php
-                        echo $fetched_data[0]["e_full_contact_two"];
-                         ?>">
+                <input type="text" name="emergencyPhone2">
                 </div>
 
                 <!-- Contact 3 -->
                 <h4>Contact 3</h4>
                 <div class="formField">
                 <label for="emergencyName3">Full Name</label>
-                <input type="text" name="emergencyName3" value="<?php
-                        echo $fetched_data[0]["e_full_name_three"];
-                         ?>">
+                <input type="text" name="emergencyName3">
                 </div>
                 <div class="formField">
                 <label for="emergencyRelation3">Relationship</label>
-                <input type="text" name="emergencyRelation3" value="<?php
-                        echo $fetched_data[0]["e_full_relation_three"];
-                         ?>">
+                <input type="text" name="emergencyRelation3">
                 </div>
                 <div class="formField">
                 <label for="emergencyPhone3">Contact Number</label>
-                <input type="text" name="emergencyPhone3" value="<?php
-                        echo $fetched_data[0]["e_full_contact_three"];
-                         ?>">
+                <input type="text" name="emergencyPhone3">
                 </div>
                 <div class="formField">
                         <button type="submit" class="saveChangesBtn">Update</button>
@@ -641,10 +397,6 @@
             }
 
         })
-    // After 3 hours auto unset profile page session
-    setTimeout(() => {
-        window.location.href = "/task-management/logoutFromProfile.php";
-    }, 3 * 60 * 60 * 1000);
     </script>
 </body>
 </html>
