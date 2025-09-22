@@ -14,6 +14,8 @@
     <title>Task Management</title>
 </head>
 <body>
+    <!-- mobile protection -->
+     <?php include_once("../components/mobile.php");?>
     <section id="loginContainer">
         <!-- login form -->
         <form action="" method="post" class="loginForm">

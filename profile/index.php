@@ -12,6 +12,8 @@
     <title>Profile</title>
 </head>
 <body>
+        <!-- mobile protection -->
+ <?php include_once("../components/mobile.php");?>
     <section id="container">
         <!-- profile page top bar -->
         <div class="topBar">

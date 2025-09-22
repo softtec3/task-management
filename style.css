@@ -378,3 +378,26 @@ a {
   right: 5px;
   cursor: pointer;
 }
+/* mobile protection */
+#mobileView {
+  position: fixed;
+  width: 100%;
+  height: 100vh;
+  background-color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+  display: none;
+  padding: 10px;
+  text-align: center;
+}
+#mobileView p {
+  font-size: 24px;
+}
+
+@media only screen and (max-width: 1280px) {
+  #mobileView {
+    display: flex;
+  }
+}

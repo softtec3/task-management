@@ -12,6 +12,8 @@
     <title>Task Management</title>
 </head>
 <body>
+        <!-- mobile protection -->
+     <?php include_once("../components/mobile.php");?>
     <section id="container">
         <!-- Sidebar -->
         <?php include_once("../components/sidebar.php")?>
